@@ -1,6 +1,6 @@
 {
   "name": "nuxt-multi-tenancy-module",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Nuxt module to support multi tenancy by subfolder of pages/",
   "main": "src/module.js",
   "repository": "https://github.com/hieuhani/nuxt-multi-tenancy-module.git",
@@ -10,10 +10,12 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint --ext .js ."
+    "lint": "eslint --ext .js .",
+    "release": "standard-version && git push --follow-tags && npm publish"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^3.1.0",
-    "eslint": "^7.7.0"
+    "@nuxtjs/eslint-config": "latest",
+    "eslint": "latest",
+    "standard-version": "latest"
   }
 }
