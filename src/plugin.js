@@ -1,15 +1,15 @@
 import Router from 'vue-router'
 import { routerOptions } from './defaultRouter'
 
-const universities = ['neu', 'ftu']
-const defaulTenant = 'home'
+const tenants = <%= JSON.stringify(options.tenants, undefined, 2)  %>
+const defaulTenant = '<%= options.defaultTenant %>'
 
 export function createRouter (ssrContext) {
   let tenant
   if (ssrContext) {
     tenant =
       ssrContext.req.headers.host &&
-      universities.find(tenant =>
+      tenants.find(tenant =>
         ssrContext.req.headers.host.startsWith(tenant)
       )
     ssrContext.nuxt.tenant = tenant
