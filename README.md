@@ -27,3 +27,22 @@ export default {
   },
 };
 ```
+
+## Options
+
+### `tenants`
+
+- Type: `Array[String]`
+- Required
+
+To specify the list of tenants that shoud match to sub-directories in pages/
+
+### `defaultTenant`
+
+- Type: `String`
+
+To specify the default tenant when no tenant is matched
+
+## License
+
+MIT License
