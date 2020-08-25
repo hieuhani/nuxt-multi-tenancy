@@ -1,5 +1,8 @@
 # Nuxt Multi Tenancy Module
 
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+
 > Run multiple web applications in single NuxtJS instance
 
 ## Introduction
@@ -20,7 +23,7 @@ yarn add nuxt-multi-tenancy-module
 
 ```js
 export default {
-  buildModules: [["nuxt-multi-tenancy-module"]],
+  buildModules: ["nuxt-multi-tenancy-module"],
   multiTenancyModule: {
     tenants: ["apple", "banana"],
     defaultTenant: "home",
@@ -46,3 +49,10 @@ To specify the default tenant when no tenant is matched
 ## License
 
 MIT License
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/@nuxtjs/router/latest.svg
+[npm-version-href]: https://npmjs.com/package/nuxt-multi-tenancy-module
+[npm-downloads-src]: https://img.shields.io/npm/v/nuxt-multi-tenancy-module/latest.svg
+[npm-downloads-href]: https://npmjs.com/package/nuxt-multi-tenancy-module
