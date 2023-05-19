@@ -28,7 +28,8 @@ export default {
 
   multiTenancyModule: {
     tenants: ["apple", "banana"],
-    defaultTenant: "home"
+    defaultTenant: "home",
+    tenantsAlias: [{ target: "apple", map: "orange" }]
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
