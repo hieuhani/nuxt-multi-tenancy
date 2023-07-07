@@ -12,6 +12,9 @@ module.exports = function () {
     if (!options.defaultTenant) {
       console.warn('multiTenancyModule default tenant has not been specified')
     }
+    if (typeof options.tenantsAlias !== 'object') {
+      console.warn('multiTenancyModule tenants alias tenant must be an object with target & map')
+    }
   } else {
     console.error('multiTenancyModule option must be specified in Nuxt config')
     return
