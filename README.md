@@ -4,7 +4,7 @@ Nuxt 3 Multi-tenancy module for doing amazing things.
 
 ## Features
 
-- ⛰ &nbsp;Multi-tenancy Nuxt sites support by sub-domains or custom domains
+- ⛰ &nbsp;Multi-tenancy Nuxt sites support by sub-domains
 
 
 ## Quick Setup
@@ -32,7 +32,35 @@ export default defineNuxtConfig({
 })
 ```
 
+3. Create `[site]` folder under your Nuxt `pages` directory, you can check the [playground's pages folder](./playground/pages/[site]/) for referencing.
+
 That's it! You can now use Nuxt Multi-tenancy in your Nuxt app ✨
+
+## Options
+
+Configure Nuxt Multi-tenancy module with the `multiTenancy` property.
+
+```js
+export default defineNuxtConfig({
+  modules: ['nuxt-multi-tenancy'],
+  // default options
+  multiTenancy: {
+    tenantDynamicRoute: 'site'
+  },
+})
+```
+
+## useTenant composition API
+
+Use useTenant() to get the tenant ID
+
+```js
+import { useTenant } from '#imports'
+const tenant = useTenant()
+```
+
+
+
 
 ## Development
 
