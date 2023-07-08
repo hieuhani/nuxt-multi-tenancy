@@ -59,3 +59,7 @@ yarn test:watch
 # Release new version
 yarn release
 ```
+
+## License
+
+[MIT License](./LICENSE)
