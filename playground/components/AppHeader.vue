@@ -4,6 +4,8 @@
       <NuxtLink :to="`${protocol}//${rootHost}`" class="logo">
         Nuxt DEV
       </NuxtLink>
+    </div>
+    <div class="tenant-wrapper">
       <NuxtLink v-if="tenant" :to="`${protocol}//${tenant}.${rootHost}`">
         {{ tenant }}
       </NuxtLink>
@@ -50,9 +52,14 @@ const rootHost = extractRootHost(host);
   font-size: 1.5rem;
 }
 .app-header .logo-wrapper {
-  margin-right: auto;
   display: flex;
   align-items: center;
+}
+.app-header .tenant-wrapper {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
 }
 .app-header .logo {
   background-color: #18181b;
