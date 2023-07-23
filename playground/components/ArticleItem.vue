@@ -1,6 +1,8 @@
 <template>
   <article class="article-item">
-    <NuxtLink :to="`http://${article.user.username}.localhost:3000/${article.slug}`">
+    <NuxtLink
+      :to="`${protocol}//${profile.tenant}.${rootHost}/${article.slug}`"
+    >
       <h3 class="title">
         {{ article.title }}
       </h3>
@@ -9,23 +11,37 @@
       {{ article.description }}
     </p>
     <div class="post-bar">
-      <NuxtLink :to="`http://${article.user.username}.localhost:3000`" class="article-user">
-        <div class="user-avatar">
-          <img :src="article.user.profile_image_90" />
-        </div>
-        <h3 class="name">{{ article.user.name }}</h3>
-      </NuxtLink>
+      <profile-card
+        :avatar="profile.avatar"
+        :name="profile.name"
+        :tenant="profile.tenant"
+      />
     </div>
   </article>
 </template>
 
-
 <script setup lang="ts">
-import type { Article } from '../devto/types'
+import { useRequestURL } from "nuxt/app";
+import type { Article } from "~/services/devto/types";
+import { extractRootHost } from "~/services/url";
 
-defineProps<{
-  article: Article
-}>()
+const { protocol, host } = useRequestURL();
+const rootHost = extractRootHost(host);
+const props = defineProps<{
+  article: Article;
+}>();
+
+const profile = props.article.organization
+  ? {
+      tenant: props.article.organization.slug,
+      name: props.article.organization.name,
+      avatar: props.article.organization.profile_image_90,
+    }
+  : {
+      tenant: props.article.user.username,
+      name: props.article.user.name,
+      avatar: props.article.user.profile_image_90,
+    };
 </script>
 
 <style lang="css">
@@ -36,38 +52,15 @@ defineProps<{
 
 .article-item .title {
   font-weight: 500;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .article-item .description {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .article-item .post-bar {
   display: flex;
   align-items: center;
-}
-
-.article-item .article-user {
-  display: flex;
-  align-items: center;
-}
-
-.article-item .article-user:hover {
-  text-decoration: underline;
-  color: #3b82f6;
-}
-
-.article-item .article-user .user-avatar {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: .5rem;
-  border: 2px solid #3b82f6;
-}
-
-.article-item .article-user .name {
-  font-size: 1rem;
 }
 </style>

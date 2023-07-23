@@ -5,6 +5,14 @@ export type User = {
   profile_image: string;
   profile_image_90: string;
 };
+
+export type Organization = {
+  name: string;
+  username: string;
+  slug: string;
+  profile_image: string;
+  profile_image_90: string;
+};
 export type Article = {
   id: number;
   title: string;
@@ -18,4 +26,10 @@ export type Article = {
   user: User;
   cover_image?: string;
   reading_time_minutes: number;
+  organization?: Organization;
+};
+
+export type ArticleDetail = Article & {
+  body_html: string;
+  body_markdown: string;
 };
