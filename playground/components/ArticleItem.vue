@@ -1,8 +1,6 @@
 <template>
   <article class="article-item">
-    <NuxtLink
-      :to="`${protocol}//${profile.tenant}.${rootHost}/${article.slug}`"
-    >
+    <NuxtLink :to="`${tenantHome}/${article.slug}`">
       <h3 class="title">
         {{ article.title }}
       </h3>
@@ -21,12 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRequestURL } from "nuxt/app";
 import type { Article } from "~/services/devto/types";
-import { extractRootHost } from "~/services/url";
+import { useBuildTenantUrl } from "~/services/url";
 
-const { protocol, host } = useRequestURL();
-const rootHost = extractRootHost(host);
 const props = defineProps<{
   article: Article;
 }>();
@@ -42,6 +37,8 @@ const profile = props.article.organization
       name: props.article.user.name,
       avatar: props.article.user.profile_image_90,
     };
+
+const tenantHome = useBuildTenantUrl(profile.tenant);
 </script>
 
 <style lang="css">

@@ -1,6 +1,6 @@
 {
   "name": "nuxt-multi-tenancy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Nuxt Multi-tenancy module",
   "repository": "hieuhani/nuxt-multi-tenancy",
   "license": "MIT",
@@ -23,7 +23,8 @@
     "dev:build": "nuxi build playground",
     "dev:generate": "nuxi generate playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "build": "npm run dev:prepare && npm run dev:build && npm run dev:generate",
+    "build": "npm run dev:prepare && npm run dev:build",
+    "build:vercel": "NITRO_PRESET=vercel-edge nuxt build playground",
     "release": "npm run lint && npm run prepack && changelogen --release --no-commit --no-tag && npm publish",
     "lint": "eslint .",
     "test": "vitest run",

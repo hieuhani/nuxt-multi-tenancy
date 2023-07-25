@@ -1,7 +1,14 @@
-import { defineNuxtModule, addTemplate, addPlugin, createResolver, addImports } from "@nuxt/kit";
+import {
+  defineNuxtModule,
+  addTemplate,
+  addPlugin,
+  createResolver,
+  addImports,
+} from "@nuxt/kit";
 
 export interface ModuleOptions {
   tenantDynamicRoute?: string;
+  rootDomains: string[];
 }
 
 const routerPatchFlag = "...configRouterOptions,";
@@ -13,10 +20,15 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     tenantDynamicRoute: "site",
+    rootDomains: ["localhost"],
   },
-  setup({ tenantDynamicRoute }, nuxt) {
-    const resolver = createResolver(import.meta.url)
-    addPlugin(resolver.resolve('./runtime/plugin'))
+  setup({ tenantDynamicRoute, rootDomains }, nuxt) {
+    nuxt.options.runtimeConfig.public = {
+      ...nuxt.options.runtimeConfig.public,
+      rootDomains,
+    };
+    const resolver = createResolver(import.meta.url);
+    addPlugin(resolver.resolve("./runtime/plugin"));
 
     addTemplate({
       filename: "tenant-router.options.mjs",
@@ -25,10 +37,16 @@ export default defineNuxtModule<ModuleOptions>({
       export default {
         routes: (routes) => {
           const { hostname } = useRequestURL();
-          let [site] = hostname.split(".");
-          if (site === hostname) {
+          const rootDomain = ${JSON.stringify(
+            rootDomains
+          )}.find(domain => hostname.endsWith(domain))
+          if (!rootDomain) {
             return routes
           }
+          if (hostname === rootDomain) {
+            return routes
+          }
+
           const tenantRoutePrefix = \`/:${tenantDynamicRoute}()\`
           return routes.map((route) => {
             if (route.path.startsWith(tenantRoutePrefix)) {
@@ -70,9 +88,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
     });
 
-    const composables = resolver.resolve('./runtime/composables')
-    addImports([
-      { from: composables, name: 'useTenant' },
-    ])
+    const composables = resolver.resolve("./runtime/composables");
+    addImports([{ from: composables, name: "useTenant" }]);
   },
 });

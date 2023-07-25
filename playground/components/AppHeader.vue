@@ -1,12 +1,10 @@
 <template>
   <header class="app-header">
     <div class="logo-wrapper">
-      <NuxtLink :to="`${protocol}//${rootHost}`" class="logo">
-        Nuxt DEV
-      </NuxtLink>
+      <NuxtLink :to="tenantHome" class="logo"> Nuxt DEV </NuxtLink>
     </div>
     <div class="tenant-wrapper">
-      <NuxtLink v-if="tenant" :to="`${protocol}//${tenant}.${rootHost}`">
+      <NuxtLink v-if="tenant" :to="tenantHome">
         {{ tenant }}
       </NuxtLink>
     </div>
@@ -32,12 +30,10 @@
 
 <script setup lang="ts">
 import { useTenant } from "#imports";
-import { useRequestURL } from "nuxt/app";
-import { extractRootHost } from "~/services/url";
+import { useBuildTenantUrl } from "~/services/url";
 
 const tenant = useTenant();
-const { protocol, host } = useRequestURL();
-const rootHost = extractRootHost(host);
+const tenantHome = useBuildTenantUrl(tenant);
 </script>
 
 <style>

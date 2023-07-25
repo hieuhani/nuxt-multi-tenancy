@@ -1,4 +1,6 @@
-export const extractRootHost = (host: string) => {
-  const firstHostDotIndex = host.indexOf(".");
-  return host.substring(firstHostDotIndex + 1);
+import { useRequestURL } from "nuxt/app";
+
+export const useBuildTenantUrl = (tenant: string) => {
+  const { protocol, host } = useRequestURL();
+  return `${protocol}//${tenant ? `${tenant}.` : ""}${host}`;
 };

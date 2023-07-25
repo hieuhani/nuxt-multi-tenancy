@@ -45,7 +45,8 @@ export default defineNuxtConfig({
   modules: ['nuxt-multi-tenancy'],
   // default options
   multiTenancy: {
-    tenantDynamicRoute: 'site'
+    tenantDynamicRoute: 'site',
+    rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
   },
 })
 ```

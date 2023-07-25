@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`${protocol}//${tenant}.${rootHost}`" class="profile-card">
+  <NuxtLink :to="tenantHome" class="profile-card">
     <div class="avatar">
       <img :src="avatar" />
     </div>
@@ -10,16 +10,15 @@
 </template>
 
 <script setup lang="ts">
-import { useRequestURL } from "nuxt/app";
-import { extractRootHost } from "~/services/url";
+import { useBuildTenantUrl } from "~/services/url";
 
-const { protocol, host } = useRequestURL();
-const rootHost = extractRootHost(host);
-defineProps<{
+const props = defineProps<{
   tenant: string;
   name: string;
   avatar: string;
 }>();
+
+const tenantHome = useBuildTenantUrl(props.tenant);
 </script>
 
 <style lang="css">
