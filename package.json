@@ -24,15 +24,19 @@
     "dev:generate": "nuxi generate playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "build": "npm run dev:prepare && npm run dev:build",
-    "build:vercel": "NITRO_PRESET=vercel-edge nuxt build playground",
+    "build:vercel": "yarn workspace nuxt-multi-tenancy-playground build",
     "release": "npm run lint && npm run prepack && changelogen --release --no-commit --no-tag && npm publish",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
+  "workspaces": [
+    "playground"
+  ],
   "dependencies": {
     "@nuxt/kit": "^3.6.2"
   },
+  "private": true,
   "devDependencies": {
     "@types/node": "^18",
     "@nuxt/devtools": "latest",

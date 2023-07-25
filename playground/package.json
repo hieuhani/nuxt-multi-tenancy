@@ -2,9 +2,10 @@
   "private": true,
   "name": "nuxt-multi-tenancy-playground",
   "type": "module",
+  "version": "0.0.1",
   "scripts": {
     "dev": "nuxi dev",
-    "build": "nuxi build",
+    "build": "NITRO_PRESET=vercel-edge nuxt build",
     "generate": "nuxi generate"
   },
   "devDependencies": {
