@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     <div class="logo-wrapper">
-      <NuxtLink :to="tenantHome" class="logo"> Nuxt DEV </NuxtLink>
+      <a href="https://nuxtdev.xyz" class="logo"> Nuxt DEV </a>
     </div>
     <div class="tenant-wrapper">
       <NuxtLink v-if="tenant" :to="tenantHome">
