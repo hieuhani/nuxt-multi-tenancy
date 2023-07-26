@@ -12,6 +12,7 @@ Nuxt 3 Multi-tenancy module for building multi-tenant applications on Nuxt 3
 ## Features
 
 ⛰ &nbsp;Multi-tenancy Nuxt sites support by sub-domains
+
 ✨ &nbsp;A fully functional sample playground deployed on Vercel
 
 
