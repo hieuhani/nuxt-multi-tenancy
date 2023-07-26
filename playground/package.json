@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "nuxt": "latest"
+  },
+  "dependencies": {
+    "nuxt-gtag": "^0.5.7"
   }
 }
