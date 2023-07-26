@@ -7,11 +7,14 @@ export type User = {
 };
 
 export type Organization = {
+  id: number;
   name: string;
   username: string;
   slug: string;
+  tag_line?: string;
   profile_image: string;
   profile_image_90: string;
+  joined_at: string;
 };
 export type Article = {
   id: number;

@@ -3,11 +3,6 @@
     <div class="logo-wrapper">
       <a href="https://nuxtdev.xyz" class="logo"> Nuxt DEV </a>
     </div>
-    <div class="tenant-wrapper">
-      <NuxtLink v-if="tenant" :to="tenantHome">
-        {{ tenant }}
-      </NuxtLink>
-    </div>
     <div>
       <a href="https://github.com/hieuhani/nuxt-multi-tenancy" class="github">
         <svg
@@ -28,14 +23,6 @@
   </header>
 </template>
 
-<script setup lang="ts">
-import { useTenant } from "#imports";
-import { useBuildTenantUrl } from "~/services/url";
-
-const tenant = useTenant();
-const tenantHome = useBuildTenantUrl(tenant);
-</script>
-
 <style>
 .app-header {
   margin-bottom: 1rem;
@@ -50,13 +37,9 @@ const tenantHome = useBuildTenantUrl(tenant);
 .app-header .logo-wrapper {
   display: flex;
   align-items: center;
+  margin-right: auto;
 }
-.app-header .tenant-wrapper {
-  flex: 1;
-  text-align: center;
-  font-weight: 500;
-  font-size: 1rem;
-}
+
 .app-header .logo {
   background-color: #18181b;
   color: #fff;
