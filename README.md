@@ -1,10 +1,19 @@
 # Nuxt 3 Multi-tenancy
 
-Nuxt 3 Multi-tenancy module for doing amazing things.
+Nuxt 3 Multi-tenancy module for building multi-tenant applications on Nuxt 3
+
+<p>
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="https://nuxtdev.xyz"><strong>Demo</strong></a> ·
+  <a href="#quick-setup"><strong>Quick Setup</strong></a> ·
+  <a href="#contributing"><strong>Contributing</strong></a>
+</p>
 
 ## Features
 
-- ⛰ &nbsp;Multi-tenancy Nuxt sites support by sub-domains
+⛰ &nbsp;Multi-tenancy Nuxt sites support by sub-domains
+✨ &nbsp;A fully functional sample playground deployed on Vercel
+
 
 
 ## Quick Setup
@@ -88,6 +97,22 @@ yarn test:watch
 # Release new version
 yarn release
 ```
+
+## Demo
+
+You can view the demo at [nuxtdev.xyz](https://nuxtdev.xyz)
+
+Features:
+
+- A home page to list top first 30 articles from dev.to
+- Tenant detail page. For example: [The Dev Team organization](https://devteam.nuxtdev.xyz)
+- An article detail page
+
+
+
+## Contributing
+
+- [Open an issue](https://github.com/hieuhani/nuxt-multi-tenancy/issues) if you believe you've encountered a bug with the module.
 
 ## License
 

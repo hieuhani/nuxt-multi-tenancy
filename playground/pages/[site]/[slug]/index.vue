@@ -53,6 +53,69 @@ const profile = computed(() =>
   font-size: 1.5rem;
 }
 
-.site-slug .content {
+.site-slug .content .ltag__link {
+  border: 1px solid rgb(212, 212, 212);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 0.5rem;
+  display: block;
+  margin: 0.95em 0 1.2em;
+  max-width: 100%;
+}
+
+.site-slug .content .ltag__link .ltag__link__org__pic {
+  border-radius: 0.5rem;
+  position: relative;
+  display: inline-block;
+  padding: calc(0.4vw + 8px) calc(0.8vw + 8px);
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.site-slug .content .ltag__link .ltag__link__content {
+  display: inline-block;
+  vertical-align: top;
+  padding: calc(0.7vw + 6px);
+  padding-left: 0;
+  width: calc(100% - 2.5vw - 70px);
+}
+
+.site-slug .content .ltag__link .ltag__link__org__pic > img {
+  display: inline-block;
+  width: calc(2.2vw + 45px);
+  height: calc(2.5vw + 40px);
+  margin: auto auto !important;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  max-width: 55px;
+  max-height: 55px;
+}
+.site-slug .content .ltag__link .ltag__link__user__pic {
+  display: inline-block;
+  position: absolute;
+  right: 3px;
+  bottom: calc(1vw);
+  border: 2px solid #ccc;
+  border-radius: 100%;
+  box-sizing: border-box;
+  width: calc(2vw + 28px);
+  height: calc(2vw + 28px);
+  max-width: 38px;
+  max-height: 38px;
+  border-radius: 100%;
+}
+
+.site-slug .content .ltag__link .ltag__link__user__pic img {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  margin: 0;
+}
+
+.site-slug .content .ltag__link .ltag__link__content h2 {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: calc(1.45em + 0.2vw);
 }
 </style>
