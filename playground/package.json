@@ -4,12 +4,12 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "nuxi dev",
+    "dev": "nuxt dev",
     "build": "NITRO_PRESET=vercel-edge nuxt build",
-    "generate": "nuxi generate"
+    "generate": "nuxt generate"
   },
   "devDependencies": {
-    "nuxt": "latest"
+    "nuxt": "3.6.5"
   },
   "dependencies": {
     "nuxt-gtag": "^0.5.7"

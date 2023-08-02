@@ -10,7 +10,9 @@ export type Organization = {
   id: number;
   name: string;
   username: string;
+  summary: string;
   slug: string;
+  url: string;
   tag_line?: string;
   profile_image: string;
   profile_image_90: string;
@@ -28,6 +30,8 @@ export type Article = {
   tag_list: string[];
   user: User;
   cover_image?: string;
+  social_image?: string;
+  canonical_url?: string;
   reading_time_minutes: number;
   organization?: Organization;
 };

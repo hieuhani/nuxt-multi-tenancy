@@ -5,6 +5,45 @@
   </div>
 </template>
 
+<script setup lang="ts">
+import { useRoute, useRuntimeConfig, useAppConfig } from "nuxt/app";
+import { useServerSeoMeta, useServerHead } from "@unhead/vue";
+const runtime = useRuntimeConfig();
+const route = useRoute();
+const appConfig = useAppConfig();
+
+const canonical = route.path + runtime.public.url;
+
+useServerSeoMeta({
+  title: "Nuxt Multi Tenant",
+  description: "Multi-tenancy Nuxt sites support by sub-domains",
+  robots: "index,follow",
+
+  ogUrl: canonical,
+  ogSiteName: "Nuxt Multi Tenant",
+});
+
+useServerHead({
+  link: [
+    {
+      rel: "canonical",
+      href: canonical,
+    },
+  ],
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: appConfig.author.name,
+        jobTitle: "Founder",
+      }),
+    },
+  ],
+});
+</script>
+
 <style lang="css">
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

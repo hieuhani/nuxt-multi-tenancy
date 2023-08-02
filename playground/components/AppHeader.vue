@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     <div class="logo-wrapper">
-      <a href="https://nuxtdev.xyz" class="logo"> Nuxt DEV </a>
+      <nuxt-link :href="mainLink" class="logo"> Nuxt DEV </nuxt-link>
     </div>
     <div>
       <a href="https://github.com/hieuhani/nuxt-multi-tenancy" class="github">
@@ -22,6 +22,13 @@
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+import { useTenant, useAppConfig } from "#imports";
+const config = useAppConfig();
+const tenant = useTenant();
+const mainLink = tenant ? config.url : "/";
+</script>
 
 <style>
 .app-header {

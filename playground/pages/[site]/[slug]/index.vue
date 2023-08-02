@@ -1,5 +1,5 @@
 <template>
-  <div class="site-slug" v-if="article">
+  <div v-if="article" class="site-slug">
     <h3 class="title">
       {{ article.title }}
     </h3>
@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import { computed, useFetch, useRoute, useTenant } from "#imports";
+import { useServerSeoMeta, useServerHead } from "@unhead/vue";
 import type { ArticleDetail } from "~/services/devto/types";
 
 const route = useRoute();
@@ -39,6 +40,21 @@ const profile = computed(() =>
         avatar: article.value.user.profile_image_90,
       }
 );
+
+useServerSeoMeta({
+  title: article.value?.title,
+  description: article?.value?.description,
+  ogImageUrl: article?.value?.social_image || article?.value?.cover_image,
+});
+
+useServerHead({
+  link: [
+    {
+      rel: "canonical",
+      href: article.value?.canonical_url,
+    },
+  ],
+});
 </script>
 
 <style>
