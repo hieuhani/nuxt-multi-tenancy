@@ -40,6 +40,21 @@ useServerHead({
         jobTitle: "Founder",
       }),
     },
+    {
+      key: "GTM",
+      async: true,
+      src: "https://www.googletagmanager.com/gtag/js?id=G-SPYZPSKBM8",
+    },
+    {
+      key: "GTAG-CONFIG",
+      innerHTML: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SPYZPSKBM8');
+          `,
+    },
   ],
 });
 </script>
