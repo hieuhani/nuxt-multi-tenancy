@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from "#app";
+import { defineNuxtPlugin } from "#imports";
 import { useRequestURL, useRuntimeConfig } from "nuxt/app";
 
 export default defineNuxtPlugin(() => {
