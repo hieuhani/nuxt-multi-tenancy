@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="tenantHome" class="profile-card">
     <div class="avatar">
-      <img :src="avatar" />
+      <img :src="avatar" alt="" />
     </div>
     <h3 class="name">
       {{ name }}
@@ -18,7 +18,7 @@ const props = defineProps<{
   avatar: string;
 }>();
 
-const tenantHome = useBuildTenantUrl(props.tenant);
+const tenantHome = useBuildTenantUrl(props.tenant) || "/";
 </script>
 
 <style lang="css">
