@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="tenantHome" class="profile-card">
     <div class="avatar">
-      <img :src="avatar" alt="" />
+      <img :src="avatar" alt="">
     </div>
     <h3 class="name">
       {{ name }}

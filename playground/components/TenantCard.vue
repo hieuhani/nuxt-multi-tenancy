@@ -1,7 +1,7 @@
 <template>
   <div class="tenant-card">
     <div class="profile-image">
-      <img :src="organization.profile_image" />
+      <img :src="organization.profile_image">
     </div>
     <div class="profile-info">
       <h3 class="name">
@@ -10,7 +10,9 @@
       <p class="tag-line">
         {{ organization.tag_line }}
       </p>
-      <p class="joined-on">Joined on: {{ joinedOn }}</p>
+      <p class="joined-on">
+        Joined on: {{ joinedOn }}
+      </p>
     </div>
   </div>
 </template>

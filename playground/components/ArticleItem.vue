@@ -39,8 +39,6 @@ const profile = props.article.organization
     };
 
 const tenantHome = useBuildTenantUrl(profile.tenant);
-
-const url = [tenantHome, props.article.slug].filter(Boolean).join("/");
 </script>
 
 <style lang="css">

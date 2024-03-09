@@ -1,7 +1,9 @@
 <template>
   <header class="app-header">
     <div class="logo-wrapper">
-      <nuxt-link :href="mainLink" class="logo"> Nuxt DEV </nuxt-link>
+      <nuxt-link :href="mainLink" class="logo">
+        Nuxt DEV
+      </nuxt-link>
     </div>
     <div>
       <a href="https://github.com/hieuhani/nuxt-multi-tenancy" class="github">

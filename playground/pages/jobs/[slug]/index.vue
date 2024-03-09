@@ -2,17 +2,19 @@
   <div v-if="job" class="job-details">
     <div class="organization">
       <div class="avatar">
-        <img :src="job.organization.avatar" :alt="job.organization.name" />
+        <img :src="job.organization.avatar" :alt="job.organization.name">
       </div>
       <div>
         <h3 class="title">
           {{ job.title }}
         </h3>
-        <p class="name">at {{ job.organization.name }}</p>
+        <p class="name">
+          at {{ job.organization.name }}
+        </p>
       </div>
     </div>
     <div>
-      <div class="prose" v-html="job.description"></div>
+      <div class="prose" v-html="job.description" />
     </div>
   </div>
 </template>

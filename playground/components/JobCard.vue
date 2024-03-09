@@ -3,13 +3,15 @@
     <NuxtLink :to="job.slug">
       <div class="organization">
         <div class="avatar">
-          <img :src="job.organization.avatar" :alt="job.organization.name" />
+          <img :src="job.organization.avatar" :alt="job.organization.name">
         </div>
         <div>
           <h3 class="title">
             {{ job.title }}
           </h3>
-          <p class="name">at {{ job.organization.name }}</p>
+          <p class="name">
+            at {{ job.organization.name }}
+          </p>
         </div>
       </div>
       <div class="badges">
@@ -20,7 +22,7 @@
             :alt="badge.label"
             width="20"
             height="20"
-          />
+          >
           {{ badge.label }}
         </span>
       </div>
