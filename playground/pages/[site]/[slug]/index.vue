@@ -134,4 +134,43 @@ useServerHead({
   font-weight: 500;
   font-size: calc(1.45em + 0.2vw);
 }
+
+.site-slug .content .ltag__link .ltag__link__pic {
+  display: inline-block;
+  padding: calc(0.6vw + 8px) calc(0.8vw + 8px);
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+
+.site-slug .content .ltag__link .ltag__link__pic img {
+  width: calc(1.2vw + 40px);
+  height: calc(1.2vw + 40px);
+  margin: auto auto !important;
+  border-radius: 150px;
+  box-sizing: border-box;
+  max-width: 60px;
+  max-height: 60px;
+}
+
+.site-slug .content .ltag__tag {
+  font-family: var(--ff-sans-serif);
+  border-left: 1px solid #d4d4d4 !important;
+  border-right: 1px solid #d4d4d4 !important;
+  border-bottom: 1px solid #d4d4d4 !important;
+  border-top: 30px solid #d4d4d4;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.06) !important;
+  border-radius: 1rem;
+  display: block;
+  margin: 0.95em 0 1.2em;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+}
+
+.site-slug .content .ltag__tag .ltag__tag__content {
+  width: 90%;
+  width: calc(100% - 36px);
+  padding: calc(0.5vw + 6px) 0px;
+  padding-left: 24px;
+}
 </style>

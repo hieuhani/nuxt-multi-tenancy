@@ -9,6 +9,7 @@ import {
 export interface ModuleOptions {
   tenantDynamicRoute?: string;
   rootDomains: string[];
+  sites: string[];
 }
 
 const routerPatchFlag = "...configRouterOptions,";
@@ -21,8 +22,9 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     tenantDynamicRoute: "site",
     rootDomains: ["localhost"],
+    sites: [],
   },
-  setup({ tenantDynamicRoute, rootDomains }, nuxt) {
+  setup({ tenantDynamicRoute, rootDomains, sites }, nuxt) {
     nuxt.options.runtimeConfig.public = {
       ...nuxt.options.runtimeConfig.public,
       rootDomains,
@@ -34,29 +36,42 @@ export default defineNuxtModule<ModuleOptions>({
       filename: "tenant-router.options.mjs",
       getContents: () => `
       import { useRequestURL } from 'nuxt/app';
+
+      const rewritePrefixRoute = (route, prefix) => {
+        if (route.path.startsWith(prefix)) {
+          return {
+            ...route,
+            path: route.path.replace(prefix, ""),
+          };
+        }
+        return route;
+      }
+
       export default {
         routes: (routes) => {
           const { hostname } = useRequestURL();
           const rootDomain = ${JSON.stringify(
             rootDomains
-          )}.find(domain => hostname.endsWith(domain))
+          )}.find(domain => hostname.endsWith(domain));
           if (!rootDomain) {
-            return routes
+            return routes;
           }
           if (hostname === rootDomain) {
-            return routes
+            return routes;
           }
 
-          const tenantRoutePrefix = \`/:${tenantDynamicRoute}()\`
-          return routes.map((route) => {
-            if (route.path.startsWith(tenantRoutePrefix)) {
-              return {
-                ...route,
-                path: route.path.replace(tenantRoutePrefix, ""),
-              };
-            }
-            return route;
-          });
+          const sites = new Set(${JSON.stringify(sites)});
+          const dynamicRoutePrefix = '/:${tenantDynamicRoute}()';
+          const tenant = hostname.substring(0, hostname.indexOf(rootDomain) - 1);
+
+          if (sites.has(tenant)) {
+            return routes
+              .filter((route) => !route.path.startsWith(dynamicRoutePrefix))
+              .map((route) => rewritePrefixRoute(route, '/' + tenant));
+          }
+
+          return routes
+            .map((route) => rewritePrefixRoute(route, dynamicRoutePrefix))
         },
       };
       `,

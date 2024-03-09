@@ -1,6 +1,6 @@
 {
   "name": "nuxt-multi-tenancy",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Nuxt Multi-tenancy module",
   "repository": "hieuhani/nuxt-multi-tenancy",
   "license": "MIT",
@@ -30,13 +30,13 @@
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
+  "private": true,
   "workspaces": [
     "playground"
   ],
   "dependencies": {
     "@nuxt/kit": "^3.6.2"
   },
-  "private": true,
   "devDependencies": {
     "@types/node": "^18",
     "@nuxt/devtools": "latest",

@@ -1,5 +1,5 @@
 <template>
-  <div class="articles-wrapper">
+  <div class="articles-wrapper tenant">
     <tenant-card v-if="tenantInfo" :organization="tenantInfo">
       {{ tenantInfo }}
     </tenant-card>

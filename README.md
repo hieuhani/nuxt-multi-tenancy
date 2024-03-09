@@ -11,7 +11,9 @@ Nuxt 3 Multi-tenancy module for building multi-tenant applications on Nuxt 3
 
 ## Features
 
-⛰ &nbsp;Multi-tenancy Nuxt sites support by sub-domains
+⛰ &nbsp;Multi-tenancy Nuxt dynamic sites support by subdomains
+
+🌻 &nbsp;Multiple Nuxt app sites
 
 ✨ &nbsp;A fully functional sample playground deployed on Vercel
 
@@ -46,6 +48,20 @@ export default defineNuxtConfig({
 
 That's it! You can now use Nuxt Multi-tenancy in your Nuxt app ✨
 
+4. If you want to have some additional system sites to be serving as a sub domain, for example: [jobs page](./playground/pages/jobs/) to be serving as https://jobs.nuxtdev.xyz/
+
+Configure the sites property the list of system sites:
+```js
+export default defineNuxtConfig({
+  modules: ['nuxt-multi-tenancy'],
+  multiTenancy: {
+    tenantDynamicRoute: 'site',
+    rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    sites: ['jobs']
+  },
+})
+```
+
 ## Options
 
 Configure Nuxt Multi-tenancy module with the `multiTenancy` property.
@@ -57,6 +73,7 @@ export default defineNuxtConfig({
   multiTenancy: {
     tenantDynamicRoute: 'site',
     rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    sites: []
   },
 })
 ```
@@ -107,6 +124,7 @@ Features:
 
 - A home page to list top first 30 articles from dev.to
 - Tenant detail page. For example: [The Dev Team organization](https://devteam.nuxtdev.xyz)
+- A custom static tenant page. For example: [VueJobs](https://jobs.nuxtdev.xyz)
 - An article detail page
 
 

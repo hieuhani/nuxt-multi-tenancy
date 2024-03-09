@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   },
   multiTenancy: {
     rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    sites: ["jobs"],
   },
   devtools: { enabled: true },
 });
