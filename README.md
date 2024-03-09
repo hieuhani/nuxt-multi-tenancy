@@ -11,9 +11,11 @@ Nuxt 3 Multi-tenancy module for building multi-tenant applications on Nuxt 3
 
 ## Features
 
-⛰ &nbsp;Multi-tenancy Nuxt dynamic sites support by subdomains
+⛰ &nbsp;Multi-tenancy Nuxt dynamic tenant sites support by subdomains
 
-🌻 &nbsp;Multiple Nuxt app sites
+🌻 &nbsp;Multiple Nuxt app sites in pages folder
+
+🦄 &nbsp;Custom domain for each tenant route in pages folder
 
 ✨ &nbsp;A fully functional sample playground deployed on Vercel
 
@@ -44,13 +46,13 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Create `[site]` folder under your Nuxt `pages` directory, you can check the [playground's pages folder](./playground/pages/[site]/) for referencing.
+3. If you want to use dynamic tenants, create `[site]` folder under your Nuxt `pages` directory, you can check the [playground's pages folder](./playground/pages/[site]/) for referencing.
 
 That's it! You can now use Nuxt Multi-tenancy in your Nuxt app ✨
 
 4. If you want to have some additional system sites to be serving as a sub domain, for example: [jobs page](./playground/pages/jobs/) to be serving as https://jobs.nuxtdev.xyz/
 
-Configure the sites property the list of system sites:
+Configure the sites property to add the list of tenant you want to be serving as system sites.
 ```js
 export default defineNuxtConfig({
   modules: ['nuxt-multi-tenancy'],
@@ -58,6 +60,21 @@ export default defineNuxtConfig({
     tenantDynamicRoute: 'site',
     rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
     sites: ['jobs']
+  },
+})
+```
+
+5. If you want to custom domain for each tenant route, configure the `customDomains` property a map with key of domain and value of mapping tenant route. For example: `nuxtnews.com` to `news` route.
+
+```js
+export default defineNuxtConfig({
+  modules: ['nuxt-multi-tenancy'],
+  multiTenancy: {
+    tenantDynamicRoute: 'site',
+    rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    customDomains: {
+      "nuxtnews.com": "news"
+    }
   },
 })
 ```
@@ -73,7 +90,8 @@ export default defineNuxtConfig({
   multiTenancy: {
     tenantDynamicRoute: 'site',
     rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
-    sites: []
+    sites: [],
+    customDomains: {},
   },
 })
 ```
