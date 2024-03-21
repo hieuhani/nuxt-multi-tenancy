@@ -64,7 +64,7 @@ export default defineNuxtModule<ModuleOptions>({
             return routes;
           }
           if (hostname === rootDomain) {
-            return routes;
+            return routes.filter(ignoreDynamicRoute);
           }
 
           const customDomains = ${JSON.stringify(customDomains)};
