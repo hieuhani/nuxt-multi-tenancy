@@ -1,9 +1,13 @@
 # Changelog
 
 
+## v1.2.3
+
+- fix dynamic route from custom domain
+
 ## v1.2.2
 
-[compare changes](https://undefined/undefined/compare/v1.2.1...v1.2.2)
+- fix custom domain mapping
 
 ## v1.2.1
 
