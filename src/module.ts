@@ -58,11 +58,12 @@ export default defineNuxtModule<ModuleOptions>({
           const { hostname } = useRequestURL();
 
           const customDomains = ${JSON.stringify(customDomains)};
-
-          if (customDomains[hostname]) {
+          const customDomainRoute = customDomains[hostname];
+          if (customDomainRoute) {
             return routes
               .filter(ignoreDynamicRoute)
-              .map((route) => rewritePrefixRoute(route, '/' + customDomains[hostname]));
+              .filter(route => route.path.startsWith('/' + customDomainRoute))
+              .map((route) => rewritePrefixRoute(route, '/' + customDomainRoute));
           }
 
           const rootDomain = ${JSON.stringify(
