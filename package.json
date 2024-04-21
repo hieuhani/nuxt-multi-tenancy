@@ -30,7 +30,7 @@
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
-  "private": true,
+  "private": false,
   "workspaces": [
     "playground"
   ],

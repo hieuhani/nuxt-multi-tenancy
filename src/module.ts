@@ -57,16 +57,6 @@ export default defineNuxtModule<ModuleOptions>({
         routes: (routes) => {
           const { hostname } = useRequestURL();
 
-          const rootDomain = ${JSON.stringify(
-            rootDomains
-          )}.find(domain => hostname.endsWith(domain));
-          if (!rootDomain) {
-            return routes;
-          }
-          if (hostname === rootDomain) {
-            return routes.filter(ignoreDynamicRoute);
-          }
-
           const customDomains = ${JSON.stringify(customDomains)};
 
           if (customDomains[hostname]) {
@@ -74,6 +64,18 @@ export default defineNuxtModule<ModuleOptions>({
               .filter(ignoreDynamicRoute)
               .map((route) => rewritePrefixRoute(route, '/' + customDomains[hostname]));
           }
+
+          const rootDomain = ${JSON.stringify(
+            rootDomains
+          )}.find(domain => hostname.endsWith(domain));
+
+          if (!rootDomain) {
+            return routes;
+          }
+          if (hostname === rootDomain) {
+            return routes.filter(ignoreDynamicRoute);
+          }
+
           const sites = new Set(${JSON.stringify(sites)});
 
           const tenant = hostname.substring(0, hostname.indexOf(rootDomain) - 1);
