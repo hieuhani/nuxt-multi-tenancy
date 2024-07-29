@@ -52,11 +52,12 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       const ignoreDynamicRoute = (route) => !route.path.startsWith(dynamicRoutePrefix);
+      const sites = new Set(${JSON.stringify(sites)});
+      const ignoreTenantSitesRoute = (route) => !sites.has(route.name);
 
       export default {
         routes: (routes) => {
           const { hostname } = useRequestURL();
-
           const customDomains = ${JSON.stringify(customDomains)};
           const customDomainRoute = customDomains[hostname];
           if (customDomainRoute) {
@@ -74,10 +75,8 @@ export default defineNuxtModule<ModuleOptions>({
             return routes;
           }
           if (hostname === rootDomain) {
-            return routes.filter(ignoreDynamicRoute);
+            return routes.filter(ignoreDynamicRoute).filter(ignoreTenantSitesRoute);
           }
-
-          const sites = new Set(${JSON.stringify(sites)});
 
           const tenant = hostname.substring(0, hostname.indexOf(rootDomain) - 1);
 
