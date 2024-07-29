@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.4
+
+[compare changes](https://undefined/undefined/compare/v1.2.2...v1.2.4)
+
+### 🏡 Chore
+
+- **release:** V1.2.3 (3af0e01)
+
+### ❤️  Contributors
+
+- Hieu Tran ([@hieuhani](http://github.com/hieuhani))
+
 ## v1.2.3
 
 - fix dynamic route from custom domain
