@@ -1,5 +1,5 @@
 const url = import.meta.env.PROD
-  ? "https://nuxtdev.xyz"
+  ? "https://techgoda.net"
   : "http://nuxtdev.local:3000";
 
 export default defineNuxtConfig({
@@ -10,10 +10,10 @@ export default defineNuxtConfig({
     },
   },
   multiTenancy: {
-    rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    rootDomains: ["nuxtdev.local", "techgoda.net"],
     sites: ["jobs"],
     customDomains: {
-      "news.nuxtdev.xyz": "news",
+      "news.techgoda.net": "news",
       "news.nuxtdev.local": "news",
     },
   },

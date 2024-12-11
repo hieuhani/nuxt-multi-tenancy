@@ -4,7 +4,7 @@ Nuxt 3 Multi-tenancy module for building multi-tenant applications on Nuxt 3
 
 <p>
   <a href="#features"><strong>Features</strong></a> ·
-  <a href="https://nuxtdev.xyz"><strong>Demo</strong></a> ·
+  <a href="https://techgoda.net"><strong>Demo</strong></a> ·
   <a href="#quick-setup"><strong>Quick Setup</strong></a> ·
   <a href="#contributing"><strong>Contributing</strong></a>
 </p>
@@ -50,7 +50,7 @@ export default defineNuxtConfig({
 
 That's it! You can now use Nuxt Multi-tenancy in your Nuxt app ✨
 
-4. If you want to have some additional system sites to be serving as a sub domain, for example: [jobs page](./playground/pages/jobs/) to be serving as https://jobs.nuxtdev.xyz/
+4. If you want to have some additional system sites to be serving as a sub domain, for example: [jobs page](./playground/pages/jobs/)
 
 Configure the sites property to add the list of tenant you want to be serving as system sites.
 ```js
@@ -58,7 +58,7 @@ export default defineNuxtConfig({
   modules: ['nuxt-multi-tenancy'],
   multiTenancy: {
     tenantDynamicRoute: 'site',
-    rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    rootDomains: ["nuxtdev.local", "techgoda.net"],
     sites: ['jobs']
   },
 })
@@ -71,7 +71,7 @@ export default defineNuxtConfig({
   modules: ['nuxt-multi-tenancy'],
   multiTenancy: {
     tenantDynamicRoute: 'site',
-    rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    rootDomains: ["nuxtdev.local", "techgoda.net"],
     customDomains: {
       "nuxtnews.com": "news"
     }
@@ -89,7 +89,7 @@ export default defineNuxtConfig({
   // default options
   multiTenancy: {
     tenantDynamicRoute: 'site',
-    rootDomains: ["nuxtdev.local", "nuxtdev.xyz"],
+    rootDomains: ["nuxtdev.local", "techgoda.net"],
     sites: [],
     customDomains: {},
   },
@@ -136,13 +136,13 @@ yarn release
 
 ## Demo
 
-You can view the demo at [nuxtdev.xyz](https://nuxtdev.xyz)
+You can view the demo at [techgoda.net](https://techgoda.net)
 
 Features:
 
 - A home page to list top first 30 articles from dev.to
-- Tenant detail page. For example: [The Dev Team organization](https://devteam.nuxtdev.xyz)
-- A custom static tenant page. For example: [VueJobs](https://jobs.nuxtdev.xyz)
+- Tenant detail page. For example: [The Dev Team organization](https://dnse.techgoda.net)
+- A custom static tenant page.
 - An article detail page
 
 
