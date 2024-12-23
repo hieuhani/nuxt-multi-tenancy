@@ -1,28 +1,28 @@
 import {
-  defineNuxtModule,
-  addTemplate,
-  addPlugin,
-  createResolver,
   addImports,
-} from "@nuxt/kit";
+  addPlugin,
+  addTemplate,
+  createResolver,
+  defineNuxtModule,
+} from '@nuxt/kit'
 
 export interface ModuleOptions {
-  tenantDynamicRoute?: string;
-  rootDomains: string[];
-  sites?: string[];
-  customDomains?: Record<string, string>;
+  tenantDynamicRoute?: string
+  rootDomains: string[]
+  sites?: string[]
+  customDomains?: Record<string, string>
 }
 
-const routerPatchFlag = "...configRouterOptions,";
+const routerPatchFlag = '...configRouterOptions,'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "nuxt-multi-tenancy",
-    configKey: "multiTenancy",
+    name: 'nuxt-multi-tenancy',
+    configKey: 'multiTenancy',
   },
   defaults: {
-    tenantDynamicRoute: "site",
-    rootDomains: ["localhost"],
+    tenantDynamicRoute: 'site',
+    rootDomains: ['localhost'],
     sites: [],
     customDomains: {},
   },
@@ -30,12 +30,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public = {
       ...nuxt.options.runtimeConfig.public,
       rootDomains,
-    };
-    const resolver = createResolver(import.meta.url);
-    addPlugin(resolver.resolve("./runtime/plugin"));
+    }
+    const resolver = createResolver(import.meta.url)
+    addPlugin(resolver.resolve('./runtime/plugin'))
 
     addTemplate({
-      filename: "tenant-router.options.mjs",
+      filename: 'tenant-router.options.mjs',
       getContents: () => `
       import { useRequestURL } from 'nuxt/app';
 
@@ -91,35 +91,38 @@ export default defineNuxtModule<ModuleOptions>({
         },
       };
       `,
-    });
+    })
 
-    nuxt.hook("app:templates", (app) => {
-      const routerOptionsTemplateIndex = app.templates.findIndex(
-        (template) => template.filename === "router.options.mjs"
-      );
-      if (app.templates[routerOptionsTemplateIndex]) {
-        const getContents =
-          app.templates[routerOptionsTemplateIndex].getContents;
-        if (getContents) {
-          app.templates[routerOptionsTemplateIndex].getContents = async (
-            data: Record<string, any>
-          ) => {
-            const currentContent = await getContents(data);
-            const patchIndex =
-              currentContent.indexOf(routerPatchFlag) + routerPatchFlag.length;
+    nuxt.hook('app:templates', (app) => {
+      const routerOptionsTemplate = app.templates.find(
+        (template) => template.filename === 'router.options.mjs'
+      )
+      if (!routerOptionsTemplate) return
 
-            const alteredContent = [
-              'import tenantRouterOptions from "#build/tenant-router.options";',
-              currentContent.slice(0, patchIndex),
-              `...tenantRouterOptions,${currentContent.slice(patchIndex)}`,
-            ].join("\n");
-            return alteredContent;
-          };
+      const originalGetContents = routerOptionsTemplate.getContents
+
+      routerOptionsTemplate.getContents = async (data) => {
+        const content = await originalGetContents(data)
+
+        const patchIndex = content.indexOf(routerPatchFlag)
+        if (patchIndex === -1) {
+          return content
         }
-      }
-    });
+        if (content.includes('#build/tenant-router.options')) {
+          return content
+        }
 
-    const composables = resolver.resolve("./runtime/composables");
-    addImports([{ from: composables, name: "useTenant" }]);
+        const newPatchPosition = patchIndex + routerPatchFlag.length
+
+        return [
+          'import tenantRouterOptions from "#build/tenant-router.options";',
+          content.slice(0, newPatchPosition),
+          `  ...tenantRouterOptions,${content.slice(newPatchPosition)}`,
+        ].join('\n')
+      }
+    })
+
+    const composables = resolver.resolve('./runtime/composables')
+    addImports([{ from: composables, name: 'useTenant' }])
   },
-});
+})
