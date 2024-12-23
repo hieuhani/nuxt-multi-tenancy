@@ -120,7 +120,7 @@ export default defineNuxtModule<ModuleOptions>({
           `  ...tenantRouterOptions,${content.slice(newPatchPosition)}`,
         ].join('\n');
       }
-    })
+    });
 
     const composables = resolver.resolve("./runtime/composables");
     addImports([{ from: composables, name: "useTenant" }]);
