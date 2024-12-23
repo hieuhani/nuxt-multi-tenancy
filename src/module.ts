@@ -1,28 +1,28 @@
 import {
-  addImports,
-  addPlugin,
-  addTemplate,
-  createResolver,
   defineNuxtModule,
-} from '@nuxt/kit'
+  addTemplate,
+  addPlugin,
+  createResolver,
+  addImports,
+} from "@nuxt/kit";
 
 export interface ModuleOptions {
-  tenantDynamicRoute?: string
-  rootDomains: string[]
-  sites?: string[]
-  customDomains?: Record<string, string>
+  tenantDynamicRoute?: string;
+  rootDomains: string[];
+  sites?: string[];
+  customDomains?: Record<string, string>;
 }
 
-const routerPatchFlag = '...configRouterOptions,'
+const routerPatchFlag = "...configRouterOptions,";
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'nuxt-multi-tenancy',
-    configKey: 'multiTenancy',
+    name: "nuxt-multi-tenancy",
+    configKey: "multiTenancy",
   },
   defaults: {
-    tenantDynamicRoute: 'site',
-    rootDomains: ['localhost'],
+    tenantDynamicRoute: "site",
+    rootDomains: ["localhost"],
     sites: [],
     customDomains: {},
   },
@@ -30,12 +30,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public = {
       ...nuxt.options.runtimeConfig.public,
       rootDomains,
-    }
-    const resolver = createResolver(import.meta.url)
-    addPlugin(resolver.resolve('./runtime/plugin'))
+    };
+    const resolver = createResolver(import.meta.url);
+    addPlugin(resolver.resolve("./runtime/plugin"));
 
     addTemplate({
-      filename: 'tenant-router.options.mjs',
+      filename: "tenant-router.options.mjs",
       getContents: () => `
       import { useRequestURL } from 'nuxt/app';
 
@@ -91,38 +91,38 @@ export default defineNuxtModule<ModuleOptions>({
         },
       };
       `,
-    })
+    });
 
-    nuxt.hook('app:templates', (app) => {
+    nuxt.hook("app:templates", (app) => {
       const routerOptionsTemplate = app.templates.find(
         (template) => template.filename === 'router.options.mjs'
       )
-      if (!routerOptionsTemplate) return
+      if (!routerOptionsTemplate) return;
 
-      const originalGetContents = routerOptionsTemplate.getContents
+      const originalGetContents = routerOptionsTemplate.getContents;
 
       routerOptionsTemplate.getContents = async (data) => {
-        const content = await originalGetContents(data)
+        const content = await originalGetContents(data);
 
-        const patchIndex = content.indexOf(routerPatchFlag)
+        const patchIndex = content.indexOf(routerPatchFlag);
         if (patchIndex === -1) {
-          return content
+          return content;
         }
         if (content.includes('#build/tenant-router.options')) {
-          return content
+          return content;
         }
 
-        const newPatchPosition = patchIndex + routerPatchFlag.length
+        const newPatchPosition = patchIndex + routerPatchFlag.length;
 
         return [
           'import tenantRouterOptions from "#build/tenant-router.options";',
           content.slice(0, newPatchPosition),
           `  ...tenantRouterOptions,${content.slice(newPatchPosition)}`,
-        ].join('\n')
+        ].join('\n');
       }
     })
 
-    const composables = resolver.resolve('./runtime/composables')
-    addImports([{ from: composables, name: 'useTenant' }])
+    const composables = resolver.resolve("./runtime/composables");
+    addImports([{ from: composables, name: "useTenant" }]);
   },
-})
+});
