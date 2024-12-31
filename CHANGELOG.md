@@ -1,9 +1,13 @@
 # Changelog
 
 
+## v1.2.5
+
+fix duplicated tenant router import
+
 ## v1.2.4
 
-[compare changes](https://undefined/undefined/compare/v1.2.2...v1.2.4)
+- ignore tenant sites
 
 ### 🏡 Chore
 
