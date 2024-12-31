@@ -95,11 +95,12 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.hook("app:templates", (app) => {
       const routerOptionsTemplate = app.templates.find(
-        (template) => template.filename === 'router.options.mjs'
-      )
+        (template) => template.filename === "router.options.mjs"
+      );
       if (!routerOptionsTemplate) return;
 
       const originalGetContents = routerOptionsTemplate.getContents;
+      if (!originalGetContents) return;
 
       routerOptionsTemplate.getContents = async (data) => {
         const content = await originalGetContents(data);
@@ -108,7 +109,7 @@ export default defineNuxtModule<ModuleOptions>({
         if (patchIndex === -1) {
           return content;
         }
-        if (content.includes('#build/tenant-router.options')) {
+        if (content.includes("#build/tenant-router.options")) {
           return content;
         }
 
@@ -118,8 +119,8 @@ export default defineNuxtModule<ModuleOptions>({
           'import tenantRouterOptions from "#build/tenant-router.options";',
           content.slice(0, newPatchPosition),
           `  ...tenantRouterOptions,${content.slice(newPatchPosition)}`,
-        ].join('\n');
-      }
+        ].join("\n");
+      };
     });
 
     const composables = resolver.resolve("./runtime/composables");
