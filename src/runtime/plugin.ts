@@ -15,8 +15,13 @@ export default defineNuxtPlugin(() => {
       },
     };
   }
-  const idx = hostname.indexOf(rootDomain);
-  const tenant = hostname.substring(0, idx - 1);
+  let subdomain;
+  if (config.public.strictSubdomains) {
+    subdomain = hostname.substring(0, hostname.indexOf(rootDomain) - 1);
+  } else {
+    subdomain = hostname.split(".")[0];
+  }
+  const tenant = subdomain;
 
   return {
     provide: {
