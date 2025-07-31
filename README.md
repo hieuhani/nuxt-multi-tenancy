@@ -64,7 +64,22 @@ export default defineNuxtConfig({
 })
 ```
 
-5. If you want to custom domain for each tenant route, configure the `customDomains` property a map with key of domain and value of mapping tenant route. For example: `nuxtnews.com` to `news` route.
+5. If you are using a hoster that provides preview environments with temporary domains including subdomains (e.g. `jobs.project-name-hash.example-hoster.com`), you can also disable the strict subdomain check, so only the first subdomain is used as the tenant (e.g. `foo.bar.baz.dev` → `foo`) and an exact match is not required (i.e. site + root domain).
+
+```js
+export default defineNuxtConfig({
+  modules: ['nuxt-multi-tenancy'],
+  multiTenancy: {
+    tenantDynamicRoute: 'site',
+    rootDomains: ["nuxtdev.local", "techgoda.net", "example-hoster.com"],
+    strictSubdomains: false
+    sites: ['jobs']
+  },
+})
+```
+
+
+6. If you want to custom domain for each tenant route, configure the `customDomains` property a map with key of domain and value of mapping tenant route. For example: `nuxtnews.com` to `news` route.
 
 ```js
 export default defineNuxtConfig({
@@ -90,6 +105,7 @@ export default defineNuxtConfig({
   multiTenancy: {
     tenantDynamicRoute: 'site',
     rootDomains: ["nuxtdev.local", "techgoda.net"],
+    strictSubdomains: true,
     sites: [],
     customDomains: {},
   },
@@ -104,8 +120,6 @@ Use useTenant() to get the tenant ID
 import { useTenant } from '#imports'
 const tenant = useTenant()
 ```
-
-
 
 
 ## Development
