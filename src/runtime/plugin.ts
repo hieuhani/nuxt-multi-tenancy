@@ -5,6 +5,17 @@ export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const { hostname } = useRequestURL();
 
+  const customDomains = (config.public.customDomains || {}) as Partial<Record<string, string>>;
+  const customDomain = customDomains[hostname];
+
+  if (customDomain) {
+    return {
+      provide: {
+        tenant: customDomain
+      }
+    };
+  }
+
   const rootDomains = (config.public.rootDomains || []) as string[];
   const rootDomain = rootDomains.find((domain) => hostname.endsWith(domain));
 

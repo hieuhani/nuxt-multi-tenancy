@@ -30,6 +30,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public = {
       ...nuxt.options.runtimeConfig.public,
       rootDomains,
+      customDomains
     };
     const resolver = createResolver(import.meta.url);
     addPlugin(resolver.resolve("./runtime/plugin"));
@@ -68,8 +69,8 @@ export default defineNuxtModule<ModuleOptions>({
           }
 
           const rootDomain = ${JSON.stringify(
-            rootDomains
-          )}.find(domain => hostname.endsWith(domain));
+        rootDomains
+      )}.find(domain => hostname.endsWith(domain));
 
           if (!rootDomain) {
             return routes;
