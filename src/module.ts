@@ -84,6 +84,7 @@ export default defineNuxtModule<ModuleOptions>({
           if (sites.has(tenant)) {
             return routes
               .filter(ignoreDynamicRoute)
+              .filter(route => route.path.startsWith('/' + tenant))
               .map((route) => rewritePrefixRoute(route, '/' + tenant));
           }
 
