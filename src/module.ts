@@ -30,6 +30,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public = {
       ...nuxt.options.runtimeConfig.public,
       rootDomains,
+      customDomains
     };
     const resolver = createResolver(import.meta.url);
     addPlugin(resolver.resolve("./runtime/plugin"));
