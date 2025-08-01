@@ -69,8 +69,8 @@ export default defineNuxtModule<ModuleOptions>({
           }
 
           const rootDomain = ${JSON.stringify(
-        rootDomains
-      )}.find(domain => hostname.endsWith(domain));
+            rootDomains
+          )}.find(domain => hostname.endsWith(domain));
 
           if (!rootDomain) {
             return routes;
