@@ -5,7 +5,7 @@ export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const { hostname } = useRequestURL();
 
-  const customDomains = (config.public.customDomains || {}) as Partial<Record<string, string>>;
+  const customDomains = (config.public.customDomains || {}) as Record<string, string>;
   const customDomain = customDomains[hostname];
 
   if (customDomain) {
