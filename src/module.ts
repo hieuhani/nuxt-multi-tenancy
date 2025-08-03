@@ -33,6 +33,7 @@ export default defineNuxtModule<ModuleOptions>({
       ...nuxt.options.runtimeConfig.public,
       rootDomains,
       strictSubdomains,
+      customDomains
     };
     const resolver = createResolver(import.meta.url);
     addPlugin(resolver.resolve("./runtime/plugin"));
@@ -93,6 +94,7 @@ export default defineNuxtModule<ModuleOptions>({
           if (sites.has(tenant)) {
             return routes
               .filter(ignoreDynamicRoute)
+              .filter(route => route.path.startsWith('/' + tenant))
               .map((route) => rewritePrefixRoute(route, '/' + tenant));
           }
 
