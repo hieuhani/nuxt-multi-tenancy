@@ -9,6 +9,7 @@ import {
 export interface ModuleOptions {
   tenantDynamicRoute?: string;
   rootDomains: string[];
+  strictSubdomains?: boolean;
   sites?: string[];
   customDomains?: Record<string, string>;
 }
@@ -23,13 +24,15 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     tenantDynamicRoute: "site",
     rootDomains: ["localhost"],
+    strictSubdomains: true,
     sites: [],
     customDomains: {},
   },
-  setup({ tenantDynamicRoute, rootDomains, sites, customDomains }, nuxt) {
+  setup({ tenantDynamicRoute, rootDomains, strictSubdomains, sites, customDomains }, nuxt) {
     nuxt.options.runtimeConfig.public = {
       ...nuxt.options.runtimeConfig.public,
       rootDomains,
+      strictSubdomains,
       customDomains
     };
     const resolver = createResolver(import.meta.url);
@@ -69,8 +72,8 @@ export default defineNuxtModule<ModuleOptions>({
           }
 
           const rootDomain = ${JSON.stringify(
-            rootDomains
-          )}.find(domain => hostname.endsWith(domain));
+        rootDomains
+      )}.find(domain => hostname.endsWith(domain));
 
           if (!rootDomain) {
             return routes;
@@ -79,7 +82,14 @@ export default defineNuxtModule<ModuleOptions>({
             return routes.filter(ignoreDynamicRoute).filter(ignoreTenantSitesRoute);
           }
 
-          const tenant = hostname.substring(0, hostname.indexOf(rootDomain) - 1);
+          let subdomain;
+          if (${strictSubdomains}) {
+            subdomain = hostname.substring(0, hostname.indexOf(rootDomain) - 1);
+          } else {
+            subdomain = hostname.split('.')[0];
+          }
+
+          const tenant = subdomain;
 
           if (sites.has(tenant)) {
             return routes
