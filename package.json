@@ -30,7 +30,6 @@
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
-  "private": false,
   "workspaces": [
     "playground"
   ],
@@ -38,15 +37,16 @@
     "@nuxt/kit": "^3.6.2"
   },
   "devDependencies": {
-    "@types/node": "^18",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxt/module-builder": "^0.4.0",
     "@nuxt/schema": "^3.6.2",
     "@nuxt/test-utils": "^3.6.2",
+    "@types/node": "^18",
     "changelogen": "^0.5.3",
     "eslint": "^8.42.0",
     "nuxt": "3.6.5",
     "vitest": "^0.31.4"
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }
