@@ -5,11 +5,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "NITRO_PRESET=vercel-edge nuxt build",
+    "build": "nuxt build",
     "generate": "nuxt generate"
   },
   "devDependencies": {
     "nuxt": "3.6.5"
-  },
-  "dependencies": {}
+  }
 }
