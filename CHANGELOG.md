@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v1.3.0
+
+
+### 🚀 Enhancements
+
+- Add missing meta tags for the playground pages (2991fa8)
+- Add `strictSubdomains` option to control tenant parsing from hostnames (#39)
+
+### 🩹 Fixes
+
+- Import nuxt composables from #imports (cf1a722)
+- Handle nullable router template getContents (f9324db)
+- Make `useTenant()` honor `customDomains` so tenant matches router on custom domains (#37)
+- Restrict `sites` subdomains to only their own route subtree (#38)
+
+### ❤️  Contributors
+
+- Martin Stadelmann <m.stadelmann@iqual.ch>
+- Hieu Tran ([@hieuhani](http://github.com/hieuhani))
+- Daniel Roe ([@danielroe](http://github.com/danielroe))
+- Harry Tran ([@harrytran998](http://github.com/harrytran998))
+
 ## v1.2.5
 
 fix duplicated tenant router import
